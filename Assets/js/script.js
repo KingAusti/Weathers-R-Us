@@ -126,6 +126,70 @@ const displayFiveDay = function (data) {
     }
 
 };
+//saving previous searches in localstorage
+const saveLastSearches = function(city) {
+    if (!searchedCities.includes(city)) {
+        searchedCities.push(city);
+    }
+    localStorage.setItem('searchHistory', JSON.stringify(searchedCities));
+    localStorage.setItem('searchedCity', JSON.stringify(searchedCity));
+    //display the previous searches
+    loadSavedCities();
+}
+let loadSavedCities = function() {
+    searchedCities = JSON.parse(localStorage.getItem('searchHistory'));
+    searchedCity = JSON.parse(localStorage.getItem('searchedCity'));
+
+    //if nothing is found in localstorage, create an empty array
+    if(!searchedCities) {
+        searchedCities = [];
+    }
+    if (!searchedCity) {
+        searchedCity = '';
+    }
+
+    //clear existing saves
+    $('#saved-cities').empty();
+
+    //for loop for each city in array
+    for(i = 0; i < searchedCities.length; i++) {
+        //generate button
+        let newBtn = $('<button>').addClass('btn btn-secondary').attr('type', 'submit').attr('id', searchedCities[i]).text(searchedCities[i]);
+        //append button to parent div
+        $('#saved-cities').append(newBtn)
+    }
+};
+
+loadSavedCities();
+
+$("#search").on("click", formSubmitHandler);
+
+//button to re-search the previous searches
+$('#saved-cities').on('click', function(event) {
+    let chosenCity = $(event.target).closest('button').attr('id');
+    getCityWeather(chosenCity);
+});
+//cityFormEl.addEventListener('#search', formSubmitHandler);
+// console.log(cityFormEl.addEventListener('#search', formSubmitHandler))
+//pastSearchButtonEl.addEventListener('click', pastSearch);
+
+// const getWeather = function() {    
+//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}`)
+//     .then(
+//         response => response.json()
+//     )
+//     .then(
+//         data => {
+//             TEMP = data.main.temp
+//             HUM = data.main.humidity
+//             WIND = data.wind
+//             ICON = data.weather[0].icon
+//             DESC = data.weather[0].description
+//             giveMeFive()     
+//         }
+//     )
+//     .catch(err => console.error(err));
+// }
 
 // const getThatLatMyLon = function(city){
 //     let apiUrl ="http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + API_KEY + "&units=imperial";
@@ -173,31 +237,3 @@ const displayFiveDay = function (data) {
 //     return data;
 // }
 //console.log(giveMeFive())
-
-
-
-
-//event listeners
-
-$("#search").on("click", formSubmitHandler);
-//cityFormEl.addEventListener('#search', formSubmitHandler);
-// console.log(cityFormEl.addEventListener('#search', formSubmitHandler))
-//pastSearchButtonEl.addEventListener('click', pastSearch);
-
-// const getWeather = function() {    
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}`)
-//     .then(
-//         response => response.json()
-//     )
-//     .then(
-//         data => {
-//             TEMP = data.main.temp
-//             HUM = data.main.humidity
-//             WIND = data.wind
-//             ICON = data.weather[0].icon
-//             DESC = data.weather[0].description
-//             giveMeFive()     
-//         }
-//     )
-//     .catch(err => console.error(err));
-// }
