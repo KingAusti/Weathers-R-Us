@@ -10,8 +10,9 @@ let pastSearchButtonEl = document.querySelector('#past-search');
 let weatherContainerEl = document.querySelector('#current-weather');
 
 const API_KEY = "0663fc572d76208f0ecd3412b806a465"
-let LAT;
-let LON;
+// const LAT = theWeatherData.coord.lat;
+// const LON = theWeatherData.coord.lon;
+// const UVI = data.current.uvi
 // let TEMP
 // let HUM
 // let WIND
@@ -66,7 +67,7 @@ const theWeather = function(theWeatherData) {
     //current temp
     $('#weather-temp').text('Temperature: ' + theWeatherData.main.temp.toFixed(1) + '°F');
     //current humidity
-    $('weather-humidity').text('Humidity: ' + theWeatherData.main.humidity + '%');
+    $('#weather-humidity').text('Humidity: ' + theWeatherData.main.humidity + '%');
     //current wind speed
     $('#weather-wind').text('Wind Speed: ' + theWeatherData.wind.speed.toFixed(1) + ' mph');
     //fetch uvi 
@@ -74,7 +75,7 @@ const theWeather = function(theWeatherData) {
         .then(function (response) {
             response.json().then(function (data) {
                 //display the uvi value
-                $('weather-uvi').text('UVI Index: ' + data.current.uvi);
+                $('#weather-uvi').text('UVI Index: ' + data.current.uvi);
                 //show five day forecast
                 displayFiveDay(data)
             });
