@@ -61,7 +61,7 @@ const formSubmitHandler = function(event) {
 
 const theWeather = function(theWeatherData) {
     //display formatted weather
-    $('#current-weather').addClass('border border-info border-5');
+    $('#current-weather').addClass('border border-transparent border-5 rounded-3 gap-6');
     $('#weather-title').text(theWeatherData.name + ' (' + dayjs(theWeatherData.dt * 1000).format('MM/DD/YYYY') + ') ')
     .append(`<img src="https://openweathermap.org/img/wn/${theWeatherData.weather[0].icon}@2x.png"></img>`);
     //current temp
@@ -86,7 +86,7 @@ const theWeather = function(theWeatherData) {
 };
 
 const displayFiveDay = function (data) {
-    $("#forecast-title").text("5-Day Forecast:");
+    $("#forecast-title").text("Five Day Forecast:");
 
     // clear previous entries in forecast
     $("#forecast").empty();
@@ -94,7 +94,7 @@ const displayFiveDay = function (data) {
     // for loop to get data for 5 days
     for (i = 1; i <= 5; i++) {
       // create elements div elements for daily weather card
-      let cardDiv = $("<div>").addClass("col-md-2 m-2 py-3 card text-white bg-success");
+      let cardDiv = $("<div>").addClass("col-md-2 m-2 py-3 card text-white bg-transparent rounded-3");
       let cardBodyDiv = $("<div>").addClass("card-body p-1");
   
       // apend card body div to parent card div
