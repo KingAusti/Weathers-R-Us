@@ -19,12 +19,12 @@ let LON
 // let DESC
 let fiveDay = []
 
-const showToday = () {
+const showToday = () => {
     document.appendChild
     {temp, desc} = sixDay[0]
 }
 
-const showNextFive = () {
+const showNextFive = () => {
     for (let i=1; i<sixDay.length; i++) {
         document.createElement
     }
@@ -44,29 +44,11 @@ const getThatLatMyLon = function(city){
         data => {
             LAT = data[0].lat
             LON = data[0].lon
-            getWeather()
+            giveMeFive()
         }
     )
     .catch(err => console.error(err));
 }
-
-// const getWeather = function() {    
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}`)
-//     .then(
-//         response => response.json()
-//     )
-//     .then(
-//         data => {
-//             TEMP = data.main.temp
-//             HUM = data.main.humidity
-//             WIND = data.wind
-//             ICON = data.weather[0].icon
-//             DESC = data.weather[0].description
-//             giveMeFive()     
-//         }
-//     )
-//     .catch(err => console.error(err));
-// }
 
 const giveMeFive = function() {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${LAT}&lon=${LON}&cnt=6&appid=${API_KEY}&units=imperial`)
@@ -95,3 +77,21 @@ const giveMeFive = function() {
 //event listeners
 cityFormEl.addEventListener('submit', submitForm);
 //pastSearchButtonEl.addEventListener('click', pastSearch);
+
+// const getWeather = function() {    
+//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}`)
+//     .then(
+//         response => response.json()
+//     )
+//     .then(
+//         data => {
+//             TEMP = data.main.temp
+//             HUM = data.main.humidity
+//             WIND = data.wind
+//             ICON = data.weather[0].icon
+//             DESC = data.weather[0].description
+//             giveMeFive()     
+//         }
+//     )
+//     .catch(err => console.error(err));
+// }

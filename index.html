@@ -7,7 +7,10 @@
     <!--tab icon-->
     <link rel="icon" href="./Assets/images/R2.ico">
     <!--bootstrap-->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" 
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
+          crossorigin="anonymous">
     <!--optional vanilla stylesheet-->
     <link rel="stylesheet" href="./Assets/css/style.css">
     <!--Tab title-->
@@ -24,10 +27,22 @@
             <!--search element for initial fetch query-->
             <div class="col-12 col-md-3 p-2">
                 <form id="city-search">
-                    <h2>Search For a City</h2>
-                    <input id="city" type="text" class="form-input"/>
-                    <button class="btn btn-outline-dark btn-info btn-sm" type="submit">Search</button>
-                </form>
+                    <h2>
+                        Search For a City
+                    </h2>
+                    <div>
+                        <input 
+                        id="city" 
+                        type="text" 
+                        class="form-input"
+                        />
+                    </div>
+                </form>    
+                    <button class="btn btn-outline-dark btn-info btn-sm" 
+                            type="submit">
+                            Search
+                    </button>
+                
                 <div class="past-search border" id="past-search"></div>
             </div>
         </div>
