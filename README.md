@@ -25,5 +25,8 @@ THEN I am again presented with current and future conditions for that city<br>
 * Dayjs
 ## Application Screenshot
 ![Weather Dashboard](./Assets/images/Weather%20Screenshop.png)
+## Links
+[Deployed Application](https://kingausti.github.io/Weathers-R-Us/)
+[Challenge Repo](https://github.com/KingAusti/Weathers-R-Us)
 ## Credits
 * Built by [Austin Henry](https://github.com/KingAusti)
