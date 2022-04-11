@@ -61,7 +61,7 @@ const formSubmitHandler = function(event) {
 
 const theWeather = function(theWeatherData) {
     //display formatted weather
-    $('#current-weather').addClass('border border-transparent border-5 rounded-3 gap-6');
+    $('#current-weather').addClass('translate-middle gap-6');
     $('#weather-title').text(theWeatherData.name + ' (' + dayjs(theWeatherData.dt * 1000).format('MM/DD/YYYY') + ') ')
     .append(`<img src="https://openweathermap.org/img/wn/${theWeatherData.weather[0].icon}@2x.png"></img>`);
     //current temp
@@ -149,14 +149,14 @@ let loadSavedCities = function() {
     }
 
     //clear existing saves
-    $('#saved-cities').empty();
+    $('#past-search').empty();
 
     //for loop for each city in array
     for(i = 0; i < searchedCities.length; i++) {
         //generate button
         let newBtn = $('<button>').addClass('btn btn-secondary').attr('type', 'submit').attr('id', searchedCities[i]).text(searchedCities[i]);
         //append button to parent div
-        $('#saved-cities').append(newBtn)
+        $('#past-search').append(newBtn)
     }
 };
 
@@ -165,7 +165,7 @@ loadSavedCities();
 $("#search").on("click", formSubmitHandler);
 
 //button to re-search the previous searches
-$('#saved-cities').on('click', function(event) {
+$('#past-search').on('click', function(event) {
     let chosenCity = $(event.target).closest('button').attr('id');
     getCityWeather(chosenCity);
 });
