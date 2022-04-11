@@ -17,52 +17,90 @@
     <title>Weathers R Us</title>    
 </head>
 <body class="text-center p-3 mb-2 bg-light text-dark">
+
     <header class=" p-3 mb-2 bg-info text-dark bg-opacity-75">
         <div>
             <h1>Weathers R Us</h1>
         </div>
     </header>
+
     <main class="container-fluid">
+
         <div class="row">
             <!--search element for initial fetch query-->
-            <div class="col-12 col-md-3 p-2">
-                <form id="city-search">
-                    <h2>
-                        Search For a City
-                    </h2>
-                    <div>
-                        <input 
-                        id="city" 
-                        type="text" 
-                        class="form-input"
-                        />
-                    </div>
-                </form>    
-                    <button class="btn btn-outline-dark btn-info btn-sm" 
-                            type="submit">
+            <div class="col-12 col-md-3 d-flex flex-column p-4">
+                <div class="border-bottom border-5 mb-3">
+                <h2>Search For a City</h2>
+
+                    <form id="city-search">
+                        <div class="mb-3">
+                            <input 
+                            id="city" 
+                            type="text" 
+                            autofocus="true"
+                            class="form-control form-control-lg"
+                            />
+                        </div>
+                    </form>   
+
+                    <div class="d-grid gap-5 mb-3">
+                        <button class="btn btn-outline-dark btn-info btn-sm" 
+                            type="submit"
+                            id="search">
                             Search
-                    </button>
-                
+                        </button>
+                    </div>
+                    
+                </div>
+                    
                 <div class="past-search border" id="past-search"></div>
             </div>
-        </div>
+        </div>   
+
         <div class="col-12 col-md-9">
-            <div class = "row border selected-city" id = "current-forecast">
+            <!-- <div class = "row border selected-city" id = "current-forecast">
                 <div class = "col-12">
-                    <h2 id="city-searched"></h2>
-                    <div id = "current-weather-container" class = "list-group"></div>
-                </div>  
+                    <h2 id="city-searched"></h2> -->
+                    <!-- Current Weather -->
+            <div id = "weather-container" class = "d-grid gap-5 mb-3">
+
+                <div id="current-weather" class="p-33">
+
+                    <h2 id="weather-title"></h2>
+                    <div id="current-data">
+                        <p class="text-body" id="weather-temp"></p>
+                        <p class="mt-4 text-body" id="weather-wind"></p>
+                        <p class="mt-4 text-body" id="weather-humidity"></p>
+                        <p class="mt-4 text-body" id="weather-uvi"></p>
+                    </div>
+
+                </div>       
+
             </div>
-        <div class="row border" id="five-day-forecast">
-            <h2 id="city-searched"></h2>
-            <div id="current-weather-container" class="list-group"></div>
+            <!-- five day -->
+            <div id="five-day" class="mt-4">
+                <h3 id="forecast-title"></h3>
+                <div class="row justify-content-between" id="forecast"></div>
+            </div>
+           
+            <div class="row border" class="mt-4">
+                <h2 id="city-searched"></h2>
+                <div id="fiveDay" class="list-group"></div>
+            </div>
         </div>
+
     </main>
+
     <footer class="text-center">
         <!--corny signature. Youre welcome ;]-->
         <p class="fs-6">Made with &#9829; by Austin Henry</p>
     </footer>
+
    <!--link to .js sheet-->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.10.3/dayjs.min.js"></script>
     <script src="./Assets/js/script.js"></script> 
+
 </body>
+
 </html>
