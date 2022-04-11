@@ -8,6 +8,7 @@ let forecastTitle = document.querySelector('#forecast');
 let forecastContainerEl = document.querySelector('#fiveday');
 let pastSearchButtonEl = document.querySelector('#past-search');
 let weatherContainerEl = document.querySelector('#current-weather');
+let uviEl = document.querySelector('#uv-index')
 
 const API_KEY = "0663fc572d76208f0ecd3412b806a465"
 // const LAT = theWeatherData.coord.lat;
@@ -55,8 +56,7 @@ const formSubmitHandler = function(event) {
         $('#city-searched').val('');
     } else {
         alert('This is an alert. You are alerted.')
-    }
-    
+    }    
 };
 
 const theWeather = function(theWeatherData) {
@@ -72,59 +72,62 @@ const theWeather = function(theWeatherData) {
     $('#weather-wind').text('Wind Speed: ' + theWeatherData.wind.speed.toFixed(1) + ' mph');
     //fetch uvi 
     fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + theWeatherData.coord.lat + "&lon=" + theWeatherData.coord.lon + "&appid=" + API_KEY + "&units=imperial")
-        .then(function (response) {
-            response.json().then(function (data) {
-                //display the uvi value
-                $('#weather-uvi').text('UVI Index: ' + data.current.uvi);
-                //show five day forecast
-                displayFiveDay(data)
-            });
-        });        
-    //pass searched cities to localstorage
+    .then(function (response) {
+        response.json().then(function (data) {
+            //display the uvi value
+            $('#weather-uvi').text('UV Index: ' + data.current.uvi);
+            let uviValue = data.current.uvi.toFixed(1);
+            uviEl.id = 'uv-index';
+            //if statement to change the applied color based on the UVI
+            if (uviValue >= 0 && uviValue <= 3) {
+                uviEl.className = 'uvi-good'
+            } else if (uviValue > 3 && uviValue < 8) {
+                uviEl.className = 'uvi-bad'
+            } else if (uviValue >= 8) {
+                uviEl.className = 'uvi-ugly'
+            }
+            console.log()
+            //show five day forecast
+            displayFiveDay(data)
+        });
+    });        
+//pass searched cities to localstorage
     lastCitySearched = theWeatherData.name;
     saveLastSearches(theWeatherData.name);
 };
 
 const displayFiveDay = function (data) {
     $("#forecast-title").text("Five Day Forecast:");
-
-    // clear previous entries in forecast
-    $("#forecast").empty();
-      
-    // for loop to get data for 5 days
+        // clear previous entries in forecast
+    $("#forecast").empty();      
+        // for loop to get data for 5 days
     for (i = 1; i <= 5; i++) {
-      // create elements div elements for daily weather card
+        // create elements div elements for daily weather card
       let cardDiv = $("<div>").addClass("col-md-2 m-2 py-3 card text-white bg-transparent rounded-3");
-      let cardBodyDiv = $("<div>").addClass("card-body p-1");
-  
-      // apend card body div to parent card div
-      cardDiv.append(cardBodyDiv);
-  
-      // create elements for daily weather card content
+      let cardBodyDiv = $("<div>").addClass("card-body p-1");  
+        // append card body div to parent card div
+      cardDiv.append(cardBodyDiv);  
+        // create elements for daily weather card content
       let cardTitle = $("<h5>").addClass("card-title").text(dayjs(data.daily[i].dt * 1000).format("MM/DD/YYYY"));
       let imgSrc ="https://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png";
       let cardImg = $("<img>").attr("src", imgSrc).attr("alt", "weather-icon");
-  
+        //temp card element
       let cardTemp = $("<p>")
       .addClass("card-text")
       .text("Temp: " + data.daily[i].temp.day.toFixed(1) + " °F");
-  
+        //wind card element
       let cardWind = $("<p>")
       .addClass("card-text")
       .text("Wind: " + data.daily[i].wind_speed + " MPH");
-  
+        // humidity card element
       let cardHumidity = $("<p>")
       .addClass("card-text")
-      .text("Humidity: " + data.daily[i].humidity + "%");
-  
-      // append content elements to parent div
-      cardBodyDiv.append(cardTitle, cardImg, cardTemp, cardWind, cardHumidity);
-  
-      //append cards to parent forecast div on the page
-      $("#forecast").append(cardDiv);
-  
+      .text("Humidity: " + data.daily[i].humidity + "%");  
+        // append content elements to parent div
+      cardBodyDiv.append(cardTitle, cardImg, cardTemp, cardWind, cardHumidity);  
+        //append cards to parent forecast div on the page
+      $("#forecast").append(cardDiv);  
     }
-
 };
 //saving previous searches in localstorage
 const saveLastSearches = function(city) {
@@ -139,7 +142,6 @@ const saveLastSearches = function(city) {
 let loadSavedCities = function() {
     searchedCities = JSON.parse(localStorage.getItem('searchHistory'));
     searchedCity = JSON.parse(localStorage.getItem('searchedCity'));
-
     //if nothing is found in localstorage, create an empty array
     if(!searchedCities) {
         searchedCities = [];
@@ -147,10 +149,8 @@ let loadSavedCities = function() {
     if (!searchedCity) {
         searchedCity = '';
     }
-
     //clear existing saves
     $('#past-search').empty();
-
     //for loop for each city in array
     for(i = 0; i < searchedCities.length; i++) {
         //generate button
@@ -159,15 +159,13 @@ let loadSavedCities = function() {
         $('#past-search').append(newBtn)
     }
 };
-
 loadSavedCities();
-
+//search click handler
 $("#search").on("click", formSubmitHandler);
-
 //button to re-search the previous searches
 $('#past-search').on('click', function(event) {
     let chosenCity = $(event.target).closest('button').attr('id');
-    getCityWeather(chosenCity);
+    showNextFive(chosenCity);
 });
 //cityFormEl.addEventListener('#search', formSubmitHandler);
 // console.log(cityFormEl.addEventListener('#search', formSubmitHandler))
