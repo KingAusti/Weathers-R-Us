@@ -11,25 +11,11 @@ let weatherContainerEl = document.querySelector('#current-weather');
 let uviEl = document.querySelector('#uv-index')
 
 const API_KEY = "0663fc572d76208f0ecd3412b806a465"
-// const LAT = theWeatherData.coord.lat;
-// const LON = theWeatherData.coord.lon;
-// const UVI = data.current.uvi
-// let TEMP
-// let HUM
-// let WIND
-// let ICON
-// let DESC
 let fiveDay = [];
-
-// const showToday = function() {
-//     document.appendChild
-//     {temp, desc} = sixDay[0]
-// }
 
 const showNextFive = function (city) {
     
     let apiUrl ="https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + API_KEY + "&units=imperial";
-
       
       fetch(apiUrl).then(function (response) {
           // request was successful
@@ -46,7 +32,6 @@ const showNextFive = function (city) {
           alert("Unable to connect to OpenWeather");
       });
 };
-
 const formSubmitHandler = function(event) {
     event.preventDefault();
     //console.log('a string or')
@@ -58,7 +43,6 @@ const formSubmitHandler = function(event) {
         alert('This is an alert. You are alerted.')
     }    
 };
-
 const theWeather = function(theWeatherData) {
     //display formatted weather
     $('#current-weather').addClass('translate-middle gap-6');
@@ -167,71 +151,3 @@ $('#past-search').on('click', function(event) {
     let chosenCity = $(event.target).closest('button').attr('id');
     showNextFive(chosenCity);
 });
-//cityFormEl.addEventListener('#search', formSubmitHandler);
-// console.log(cityFormEl.addEventListener('#search', formSubmitHandler))
-//pastSearchButtonEl.addEventListener('click', pastSearch);
-
-// const getWeather = function() {    
-//     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&appid=${API_KEY}`)
-//     .then(
-//         response => response.json()
-//     )
-//     .then(
-//         data => {
-//             TEMP = data.main.temp
-//             HUM = data.main.humidity
-//             WIND = data.wind
-//             ICON = data.weather[0].icon
-//             DESC = data.weather[0].description
-//             giveMeFive()     
-//         }
-//     )
-//     .catch(err => console.error(err));
-// }
-
-// const getThatLatMyLon = function(city){
-//     let apiUrl ="http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + API_KEY + "&units=imperial";
-//     fetch(apiUrl)
-//     .then(
-//        response => response.json()  
-
-//     )
-//     .then(
-//         data => {
-//             LAT = data[0].lat
-//             LON = data[0].lon
-            
-//         }    
-//     )     
-//     .catch(err => console.error(err));
-//     displayFiveDay();
-
-// };
-
-// const giveMeFive = function() {
-//     fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + theWeatherData.coor.lat + "&lon=" + theWeatherData.coor.lon + "&cnt=6&appid=" + API_KEY + "&units=imperial")
-//     .then(
-//         response => response.json()
-//     )
-//     .then(
-//         data => {
-//             data.list.forEach(day => {
-//                 fiveDay.push(
-//                     {
-//                         temp: day.main.temp,
-//                         hum: day.main.humidity,
-//                         wind: data.wind.speed,
-//                         icon: data.weather[0].icon,
-//                         desc: data.weather[0].description                        
-//                     }                      
-//                 )
-//                 //console.log(giveMeFive)
-//             }) 
-//             //displayFiveDay()
-//         }
-//     )
-//     //console.log(giveMeFive)
-//     .catch(err => console.error(err));
-//     return data;
-// }
-//console.log(giveMeFive())
